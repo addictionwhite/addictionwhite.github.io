@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style type="text/css">
+        <!--
+        body {background-color: black;}
+
+        img.displayed {
+            display: block;
+            margin-left: auto;
+            margin-right: auto }
+
+        .f-container {
+            display: flex;
+            flex-wrap: wrap;
+            #justify-content: flex-start;
+        justify-content: center;
+        }
+
+         .f-item:nth-child(3n) {
+             margin-right: 0;
+         }
+         .f-item{
+             color: white;
+             margin-bottom: 5px;
+         }
+         -->
+    </style>
+</head>
+<body>
+    <img class="displayed" src="../../image/valentine/top.png" alt="フランちゃん">
+
+    <div class="f-container">
+        <div class="f-item">ハート型を選ぶ</div>
+    </div>
+    <div class="f-container">
+        <div class="f-item">四角型を選ぶ</div>
+    </div>
+    <div class="f-container">
+        <div class="f-item">六角形型を選ぶ</div>
+    </div>
+    <div class="f-container">
+        <div class="f-item">長方形型を選ぶ</div>
+    </div>
+
+<script type="text/javascript">
+    // You're not trying to trick me, are you?
+    let targets = document.getElementsByClassName("f-container");
+    for(let i = 0; i < targets.length; i++){
+        targets[i].addEventListener("click",() => {
+        var randNum = Math.floor(Math.random()*(4-1+1)+1);
+        if(randNum >= 3){
+            location.href='./1.html'
+            return;
+        }
+        location.href='./success.html'
+    }, false);
+}
+</script>
+</body>
+</html>
