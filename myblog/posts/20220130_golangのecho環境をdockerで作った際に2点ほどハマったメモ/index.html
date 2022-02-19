@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>20220130_golangのecho環境をDockerで作った際に2点ほどハマったメモ // my note</title>
+    <link rel="shortcut icon" href="https://addictionwhite.github.io/myblog/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.92.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="tsukasa" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://addictionwhite.github.io/myblog/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="20220130_golangのecho環境をDockerで作った際に2点ほどハマったメモ"/>
+<meta name="twitter:description" content="1: golangのバージョン問題(Go moduleとGo path)
+2: Linux環境でMySQL環境をdockerで用意した際のパーミッションエラー
+1は端的に言うとgo moduleとそれ以前（go path）の差異が原因のようながら、現時点で自分があまり理解しきれてないので詳細を綴れない。 ネットの情報を断片的につなげて環境を作ろうとしてハマった。 試行錯誤した後、ホストで以下のコマンドを叩くと動くようになった。
+go mod init main ただホストで叩く=ホストでGolangの環境が必要になるので可能ならコンテナ内で完結させたい （もう少し整理した内容を記述したいが現時点で理解できていないので書けない）。
+2は2回目以降に docker-compse build  を叩くとVolumeの権限周りが影響してPermisionエラーが出る。 問題を一旦置いたままにしているが、おそらく
+ ホストOSで使っているユーザとコンテナ内で使っているユーザのUIDとGIDが不一致になることが原因のようです。 そのため、Docker for Mac/Windowsではほとんど発生しません。
+ これが原因かなと思っている
+[https://tech-blog.rakus.co.jp/entry/20200826/docker:title]
+[https://yaruki-strong-zero.hatenablog.jp/entry/docker_container_uid_gid:title]
+検証用の環境を作りたいだけなので、ビルドしなおすたび一旦コマンドでVolumeデータ消しているのだけど手間 (sudo rm -rf mysql_data/ )
+その他参考
+[https://qiita.com/p5750/items/c8e20744bd05fe6de8ea:title]
+[https://gaoblog.net/2020-12-7/:title]"/>
+
+    <meta property="og:title" content="20220130_golangのecho環境をDockerで作った際に2点ほどハマったメモ" />
+<meta property="og:description" content="1: golangのバージョン問題(Go moduleとGo path)
+2: Linux環境でMySQL環境をdockerで用意した際のパーミッションエラー
+1は端的に言うとgo moduleとそれ以前（go path）の差異が原因のようながら、現時点で自分があまり理解しきれてないので詳細を綴れない。 ネットの情報を断片的につなげて環境を作ろうとしてハマった。 試行錯誤した後、ホストで以下のコマンドを叩くと動くようになった。
+go mod init main ただホストで叩く=ホストでGolangの環境が必要になるので可能ならコンテナ内で完結させたい （もう少し整理した内容を記述したいが現時点で理解できていないので書けない）。
+2は2回目以降に docker-compse build  を叩くとVolumeの権限周りが影響してPermisionエラーが出る。 問題を一旦置いたままにしているが、おそらく
+ ホストOSで使っているユーザとコンテナ内で使っているユーザのUIDとGIDが不一致になることが原因のようです。 そのため、Docker for Mac/Windowsではほとんど発生しません。
+ これが原因かなと思っている
+[https://tech-blog.rakus.co.jp/entry/20200826/docker:title]
+[https://yaruki-strong-zero.hatenablog.jp/entry/docker_container_uid_gid:title]
+検証用の環境を作りたいだけなので、ビルドしなおすたび一旦コマンドでVolumeデータ消しているのだけど手間 (sudo rm -rf mysql_data/ )
+その他参考
+[https://qiita.com/p5750/items/c8e20744bd05fe6de8ea:title]
+[https://gaoblog.net/2020-12-7/:title]" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://addictionwhite.github.io/myblog/posts/20220130_golang%E3%81%AEecho%E7%92%B0%E5%A2%83%E3%82%92docker%E3%81%A7%E4%BD%9C%E3%81%A3%E3%81%9F%E9%9A%9B%E3%81%AB2%E7%82%B9%E3%81%BB%E3%81%A9%E3%83%8F%E3%83%9E%E3%81%A3%E3%81%9F%E3%83%A1%E3%83%A2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-19T19:20:21+09:00" />
+<meta property="article:modified_time" content="2022-02-19T19:20:21+09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://addictionwhite.github.io/myblog"><img class="app-header-avatar" src="https://addictionwhite.github.io/myblog/avatar.jpg" alt="tsukasa" /></a>
+      <h1>my note</h1>
+      <p>主に技術的な備忘録</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/addictionwhite" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">20220130_golangのecho環境をDockerで作った際に2点ほどハマったメモ</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 19, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line>
+</svg>
+              <a class="tag" href="https://addictionwhite.github.io/myblog/tags/golang/">golang</a>
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>1: golangのバージョン問題(Go moduleとGo path)</p>
+<p>2: Linux環境でMySQL環境をdockerで用意した際のパーミッションエラー</p>
+<!-- raw HTML omitted -->
+<p>1は端的に言うとgo moduleとそれ以前（go path）の差異が原因のようながら、現時点で自分があまり理解しきれてないので詳細を綴れない。
+ネットの情報を断片的につなげて環境を作ろうとしてハマった。
+試行錯誤した後、ホストで以下のコマンドを叩くと動くようになった。</p>
+<pre tabindex="0"><code>go mod init main
+
+</code></pre><p>ただホストで叩く=ホストでGolangの環境が必要になるので可能ならコンテナ内で完結させたい
+（もう少し整理した内容を記述したいが現時点で理解できていないので書けない）。</p>
+<p>2は2回目以降に <code>docker-compse build </code> を叩くとVolumeの権限周りが影響してPermisionエラーが出る。
+問題を一旦置いたままにしているが、おそらく</p>
+<blockquote>
+<p>ホストOSで使っているユーザとコンテナ内で使っているユーザのUIDとGIDが不一致になることが原因のようです。 そのため、Docker for Mac/Windowsではほとんど発生しません。</p>
+</blockquote>
+<p>これが原因かなと思っている</p>
+<p>[https://tech-blog.rakus.co.jp/entry/20200826/docker:title]</p>
+<p>[https://yaruki-strong-zero.hatenablog.jp/entry/docker_container_uid_gid:title]</p>
+<p>検証用の環境を作りたいだけなので、ビルドしなおすたび一旦コマンドでVolumeデータ消しているのだけど手間 (<code>sudo rm -rf mysql_data/</code> )</p>
+<p>その他参考</p>
+<p>[https://qiita.com/p5750/items/c8e20744bd05fe6de8ea:title]</p>
+<p>[https://gaoblog.net/2020-12-7/:title]</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

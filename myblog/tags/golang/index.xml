@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on my note</title>
+    <link>https://addictionwhite.github.io/myblog/tags/golang/</link>
+    <description>Recent content in golang on my note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 19 Feb 2022 19:20:21 +0900</lastBuildDate><atom:link href="https://addictionwhite.github.io/myblog/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>20220130_golangのecho環境をDockerで作った際に2点ほどハマったメモ</title>
+      <link>https://addictionwhite.github.io/myblog/posts/20220130_golang%E3%81%AEecho%E7%92%B0%E5%A2%83%E3%82%92docker%E3%81%A7%E4%BD%9C%E3%81%A3%E3%81%9F%E9%9A%9B%E3%81%AB2%E7%82%B9%E3%81%BB%E3%81%A9%E3%83%8F%E3%83%9E%E3%81%A3%E3%81%9F%E3%83%A1%E3%83%A2/</link>
+      <pubDate>Sat, 19 Feb 2022 19:20:21 +0900</pubDate>
+      
+      <guid>https://addictionwhite.github.io/myblog/posts/20220130_golang%E3%81%AEecho%E7%92%B0%E5%A2%83%E3%82%92docker%E3%81%A7%E4%BD%9C%E3%81%A3%E3%81%9F%E9%9A%9B%E3%81%AB2%E7%82%B9%E3%81%BB%E3%81%A9%E3%83%8F%E3%83%9E%E3%81%A3%E3%81%9F%E3%83%A1%E3%83%A2/</guid>
+      <description>1: golangのバージョン問題(Go moduleとGo path)
+2: Linux環境でMySQL環境をdockerで用意した際のパーミッションエラー
+1は端的に言うとgo moduleとそれ以前（go path）の差異が原因のようながら、現時点で自分があまり理解しきれてないので詳細を綴れない。 ネットの情報を断片的につなげて環境を作ろうとしてハマった。 試行錯誤した後、ホストで以下のコマンドを叩くと動くようになった。
+go mod init main ただホストで叩く=ホストでGolangの環境が必要になるので可能ならコンテナ内で完結させたい （もう少し整理した内容を記述したいが現時点で理解できていないので書けない）。
+2は2回目以降に docker-compse build  を叩くとVolumeの権限周りが影響してPermisionエラーが出る。 問題を一旦置いたままにしているが、おそらく
+ ホストOSで使っているユーザとコンテナ内で使っているユーザのUIDとGIDが不一致になることが原因のようです。 そのため、Docker for Mac/Windowsではほとんど発生しません。
+ これが原因かなと思っている
+[https://tech-blog.rakus.co.jp/entry/20200826/docker:title]
+[https://yaruki-strong-zero.hatenablog.jp/entry/docker_container_uid_gid:title]
+検証用の環境を作りたいだけなので、ビルドしなおすたび一旦コマンドでVolumeデータ消しているのだけど手間 (sudo rm -rf mysql_data/ )
+その他参考
+[https://qiita.com/p5750/items/c8e20744bd05fe6de8ea:title]
+[https://gaoblog.net/2020-12-7/:title]</description>
+    </item>
+    
+  </channel>
+</rss>
