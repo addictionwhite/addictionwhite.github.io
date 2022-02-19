@@ -6,7 +6,38 @@
     <description>Recent content on my note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 19 Feb 2022 19:20:21 +0900</lastBuildDate><atom:link href="https://addictionwhite.github.io/myblog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Feb 2022 00:06:36 +0900</lastBuildDate><atom:link href="https://addictionwhite.github.io/myblog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>20220219_golang備忘録</title>
+      <link>https://addictionwhite.github.io/myblog/posts/20220219_golang%E5%82%99%E5%BF%98%E9%8C%B2/</link>
+      <pubDate>Sun, 20 Feb 2022 00:06:36 +0900</pubDate>
+      
+      <guid>https://addictionwhite.github.io/myblog/posts/20220219_golang%E5%82%99%E5%BF%98%E9%8C%B2/</guid>
+      <description>プライベートで自分用のツールを作っていた際に調べたことなど。
+その場で即興で調べて、すぐ忘れてしまうので（特に普段触り続けていないと）、忘備録として。
+実装の速度を上げるためにも、せっかく調べたところや、典型的なエラーのパターンはいくらか記憶して、思考の流れは定着させて馴染ませていきたいところ。
+エラー　package exec is not in GOROOT main.go:6:5: package exec is not in GOROOT (/usr/local/go/src/exec) [https://qiita.com/KEINOS/items/ad6eaa255fecd58815d4]
+ exec は os パッケージの一部です。exec → os/exec と指定します。
+ ドンピシャ。 exec.Command() だからexec をimportしておけばいいと短絡的に書いていた。 最初エラーを見たとき、go module周りの設定あたりかな、などと思ってしまった。
+ちゃんとどこのパッケージにあるか公式見ながら進める習慣をつける。
+[https://pkg.go.dev/:title]
+[https://pkg.go.dev/std:title]
+エラーの取り回し // 1回目 	out, err := exec.Command(&amp;#34;ls&amp;#34;).Output() if err != nil { panic(err) } fmt.Print(string(out)) // 2回目代入　:=だと逆にエラーになる 	out, err = exec.Command(&amp;#34;pwd&amp;#34;).Output() if err != nil { panic(err) } fmt.Print(string(out)) 上のブロック(1回目の処理）の処理を消すと関係ないと思っていた2つめのブロックでエラーになり少し面食らう。 エラーを受け取る流れが続いている際は1つ目は省略変数宣言になっている場合は意識しておくこと</description>
+    </item>
+    
+    <item>
+      <title>20220211_AWSCloudShellにてGolangの環境設定</title>
+      <link>https://addictionwhite.github.io/myblog/posts/20220211_awscloudshell%E3%81%AB%E3%81%A6golang%E3%81%AE%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/</link>
+      <pubDate>Sun, 20 Feb 2022 00:01:08 +0900</pubDate>
+      
+      <guid>https://addictionwhite.github.io/myblog/posts/20220211_awscloudshell%E3%81%AB%E3%81%A6golang%E3%81%AE%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/</guid>
+      <description>言って特別なことはしておらず
+$ sudo mkdir /usr/local/go $ cd /usr/local/go $ sudo curl -O https://storage.googleapis.com/golang/go1.17.6.linux-amd64.tar.gz $ sudo tar -C /usr/local/ -xzf go1.17.6.linux-amd64.tar.gz $ export PATH=$PATH:/usr/local/go/bin $ go version go version go1.17.6 linux/amd64 メモ [https://docs.aws.amazon.com/ja_jp/cloudshell/latest/userguide/vm-specs.html:title]
+ 現在、AWS CloudShellコンピューティング環境は Docker コンテナをサポートしていません。
+  環境を汚さないようDocker環境上で動かしたかったが、AWS CloudShell環境なのですぐ使い捨てできるかと思い割り切った。 今回はgoでCLI用のツールを作りたかったので、この環境でも問題ないかと割り切った  手軽に用意できるのと、いつも使っているAmazon WorkSpacesを使うより節約になるかと思い 環境すぐに使い捨てられるので、導入の再現性確認しやすくていい    参考記事 [https://go.dev/doc/install:title]
+[https://qiita.com/Esfahan/items/30f801dc6e5bada9ba54:title]</description>
+    </item>
+    
     <item>
       <title>20220130_golangのecho環境をDockerで作った際に2点ほどハマったメモ</title>
       <link>https://addictionwhite.github.io/myblog/posts/20220130_golang%E3%81%AEecho%E7%92%B0%E5%A2%83%E3%82%92docker%E3%81%A7%E4%BD%9C%E3%81%A3%E3%81%9F%E9%9A%9B%E3%81%AB2%E7%82%B9%E3%81%BB%E3%81%A9%E3%83%8F%E3%83%9E%E3%81%A3%E3%81%9F%E3%83%A1%E3%83%A2/</link>
