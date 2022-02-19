@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://addictionwhite.github.io/myblog/public/categories/</loc>
+    <loc>https://addictionwhite.github.io/myblog/public/categories/</loc>
   </url><url>
-    <loc>http://addictionwhite.github.io/myblog/public/</loc>
+    <loc>https://addictionwhite.github.io/myblog/public/</loc>
   </url><url>
-    <loc>http://addictionwhite.github.io/myblog/public/tags/</loc>
+    <loc>https://addictionwhite.github.io/myblog/public/tags/</loc>
   </url>
 </urlset>
