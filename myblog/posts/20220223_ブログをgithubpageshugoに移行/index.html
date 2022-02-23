@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>20220223_ブログをGitHubPagesHugoに移行 // my note</title>
+    <link rel="shortcut icon" href="https://addictionwhite.github.io/myblog/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.92.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="tsukasa" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://addictionwhite.github.io/myblog/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="20220223_ブログをGitHubPagesHugoに移行"/>
+<meta name="twitter:description" content="動機  今まで使用していたブログの広告が気になり、記事が見辛く景観が悪いと感じた  無料で使わせてもらっている状態なので有料プランも検討したが、他に解析や集客機能など色々ついており自分の用途としては過剰だと感じたため   静的CMSを使用したことがないので、触って感触を知っておきたかった  Golangを学習していたので、何かしら恩恵があれば嬉しいくらいにHugoを選択(細かいことを言うと他にも判断軸はあったが)    懸念していたこと  Hugoに依存する形になる  マークダウン形式でテキストが残っていれば別のところに退避できるはず   記事を投稿する手間が増えないか  以前よりは少し増えたが、現時点では許容範囲    試した温度感  レイアウトが綺麗になったと感じる  それによってモチベーションは上がったかも知れない いろいろなテーマがあるのは嬉しいが、導入や設定に手間が掛かるものもあるのでなるべくシンプルに設定できるものを探した（細かい設定を失念する懸念があるため） テーマがないとHTML出力できないが、簡素なものでいいのでデフォルトで用意されていた方がいい気がする（という個人の意見）   今のところGolangの学習になるなどの恩恵などはない  Goを知らなくてもいいということなので、これは一般的には利点ではある   自分の環境の問題だが、Linux環境で日本語の記事を書くのは少し辛い  開発系はAwsのWorkspace(Amazon Linux)で行っており、Hugoの環境が必要になるため   投稿したらGithubPagesで自動でデプロイしてくれる仕組みを提供してくれているが、一旦様子を見たい＆スモールスタートしたいのでHugoで生成したブツをコピーしてGithubPagesに展開するような運用をとっている  その他メモ  プロジェクトを作った後に、git add . して一旦綺麗なプロジェクトをコミットしたつもりになって、後から雑に作業&amp;git stash -u したらプロジェクト初期化時に追加されていた空のディレクトリがなくなり少しはまった  参考記事 https://memorandom.whitepenguins.com/posts/hugo_linux/
+sudo yum install -y yum-plugin-copr sudo yum copr enable -y daftaupe/hugo sudo yum install -y hugo hugo version "/>
+
+    <meta property="og:title" content="20220223_ブログをGitHubPagesHugoに移行" />
+<meta property="og:description" content="動機  今まで使用していたブログの広告が気になり、記事が見辛く景観が悪いと感じた  無料で使わせてもらっている状態なので有料プランも検討したが、他に解析や集客機能など色々ついており自分の用途としては過剰だと感じたため   静的CMSを使用したことがないので、触って感触を知っておきたかった  Golangを学習していたので、何かしら恩恵があれば嬉しいくらいにHugoを選択(細かいことを言うと他にも判断軸はあったが)    懸念していたこと  Hugoに依存する形になる  マークダウン形式でテキストが残っていれば別のところに退避できるはず   記事を投稿する手間が増えないか  以前よりは少し増えたが、現時点では許容範囲    試した温度感  レイアウトが綺麗になったと感じる  それによってモチベーションは上がったかも知れない いろいろなテーマがあるのは嬉しいが、導入や設定に手間が掛かるものもあるのでなるべくシンプルに設定できるものを探した（細かい設定を失念する懸念があるため） テーマがないとHTML出力できないが、簡素なものでいいのでデフォルトで用意されていた方がいい気がする（という個人の意見）   今のところGolangの学習になるなどの恩恵などはない  Goを知らなくてもいいということなので、これは一般的には利点ではある   自分の環境の問題だが、Linux環境で日本語の記事を書くのは少し辛い  開発系はAwsのWorkspace(Amazon Linux)で行っており、Hugoの環境が必要になるため   投稿したらGithubPagesで自動でデプロイしてくれる仕組みを提供してくれているが、一旦様子を見たい＆スモールスタートしたいのでHugoで生成したブツをコピーしてGithubPagesに展開するような運用をとっている  その他メモ  プロジェクトを作った後に、git add . して一旦綺麗なプロジェクトをコミットしたつもりになって、後から雑に作業&amp;git stash -u したらプロジェクト初期化時に追加されていた空のディレクトリがなくなり少しはまった  参考記事 https://memorandom.whitepenguins.com/posts/hugo_linux/
+sudo yum install -y yum-plugin-copr sudo yum copr enable -y daftaupe/hugo sudo yum install -y hugo hugo version " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://addictionwhite.github.io/myblog/posts/20220223_%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92githubpageshugo%E3%81%AB%E7%A7%BB%E8%A1%8C/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-23T18:15:27+09:00" />
+<meta property="article:modified_time" content="2022-02-23T18:15:27+09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://addictionwhite.github.io/myblog"><img class="app-header-avatar" src="https://addictionwhite.github.io/myblog/avatar.jpg" alt="tsukasa" /></a>
+      <h1>my note</h1>
+      <p>主に技術的な備忘録</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/addictionwhite" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>My Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">20220223_ブログをGitHubPagesHugoに移行</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 23, 2022
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="動機">動機</h1>
+<ul>
+<li>今まで使用していたブログの広告が気になり、記事が見辛く景観が悪いと感じた
+<ul>
+<li>無料で使わせてもらっている状態なので有料プランも検討したが、他に解析や集客機能など色々ついており自分の用途としては過剰だと感じたため</li>
+</ul>
+</li>
+<li>静的CMSを使用したことがないので、触って感触を知っておきたかった
+<ul>
+<li>Golangを学習していたので、何かしら恩恵があれば嬉しいくらいにHugoを選択(細かいことを言うと他にも判断軸はあったが)</li>
+</ul>
+</li>
+</ul>
+<h1 id="懸念していたこと">懸念していたこと</h1>
+<ul>
+<li>Hugoに依存する形になる
+<ul>
+<li>マークダウン形式でテキストが残っていれば別のところに退避できるはず</li>
+</ul>
+</li>
+<li>記事を投稿する手間が増えないか
+<ul>
+<li>以前よりは少し増えたが、現時点では許容範囲</li>
+</ul>
+</li>
+</ul>
+<h1 id="試した温度感">試した温度感</h1>
+<ul>
+<li>レイアウトが綺麗になったと感じる
+<ul>
+<li>それによってモチベーションは上がったかも知れない</li>
+<li>いろいろなテーマがあるのは嬉しいが、導入や設定に手間が掛かるものもあるのでなるべくシンプルに設定できるものを探した（細かい設定を失念する懸念があるため）</li>
+<li>テーマがないとHTML出力できないが、簡素なものでいいのでデフォルトで用意されていた方がいい気がする（という個人の意見）</li>
+</ul>
+</li>
+<li>今のところGolangの学習になるなどの恩恵などはない
+<ul>
+<li>Goを知らなくてもいいということなので、これは一般的には利点ではある</li>
+</ul>
+</li>
+<li>自分の環境の問題だが、Linux環境で日本語の記事を書くのは少し辛い
+<ul>
+<li>開発系はAwsのWorkspace(Amazon Linux)で行っており、Hugoの環境が必要になるため</li>
+</ul>
+</li>
+<li>投稿したらGithubPagesで自動でデプロイしてくれる仕組みを提供してくれているが、一旦様子を見たい＆スモールスタートしたいのでHugoで生成したブツをコピーしてGithubPagesに展開するような運用をとっている</li>
+</ul>
+<h1 id="その他メモ">その他メモ</h1>
+<ul>
+<li>プロジェクトを作った後に、git add . して一旦綺麗なプロジェクトをコミットしたつもりになって、後から雑に作業&amp;git stash -u したらプロジェクト初期化時に追加されていた空のディレクトリがなくなり少しはまった</li>
+</ul>
+<h1 id="参考記事">参考記事</h1>
+<p><a href="https://memorandom.whitepenguins.com/posts/hugo_linux/">https://memorandom.whitepenguins.com/posts/hugo_linux/</a></p>
+<pre tabindex="0"><code>sudo yum install -y yum-plugin-copr
+sudo yum copr enable -y daftaupe/hugo
+sudo yum install -y hugo
+hugo version
+</code></pre>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

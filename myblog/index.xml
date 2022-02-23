@@ -6,7 +6,17 @@
     <description>Recent content on my note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Feb 2022 00:06:36 +0900</lastBuildDate><atom:link href="https://addictionwhite.github.io/myblog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Feb 2022 18:15:27 +0900</lastBuildDate><atom:link href="https://addictionwhite.github.io/myblog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>20220223_ブログをGitHubPagesHugoに移行</title>
+      <link>https://addictionwhite.github.io/myblog/posts/20220223_%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92githubpageshugo%E3%81%AB%E7%A7%BB%E8%A1%8C/</link>
+      <pubDate>Wed, 23 Feb 2022 18:15:27 +0900</pubDate>
+      
+      <guid>https://addictionwhite.github.io/myblog/posts/20220223_%E3%83%96%E3%83%AD%E3%82%B0%E3%82%92githubpageshugo%E3%81%AB%E7%A7%BB%E8%A1%8C/</guid>
+      <description>動機  今まで使用していたブログの広告が気になり、記事が見辛く景観が悪いと感じた  無料で使わせてもらっている状態なので有料プランも検討したが、他に解析や集客機能など色々ついており自分の用途としては過剰だと感じたため   静的CMSを使用したことがないので、触って感触を知っておきたかった  Golangを学習していたので、何かしら恩恵があれば嬉しいくらいにHugoを選択(細かいことを言うと他にも判断軸はあったが)    懸念していたこと  Hugoに依存する形になる  マークダウン形式でテキストが残っていれば別のところに退避できるはず   記事を投稿する手間が増えないか  以前よりは少し増えたが、現時点では許容範囲    試した温度感  レイアウトが綺麗になったと感じる  それによってモチベーションは上がったかも知れない いろいろなテーマがあるのは嬉しいが、導入や設定に手間が掛かるものもあるのでなるべくシンプルに設定できるものを探した（細かい設定を失念する懸念があるため） テーマがないとHTML出力できないが、簡素なものでいいのでデフォルトで用意されていた方がいい気がする（という個人の意見）   今のところGolangの学習になるなどの恩恵などはない  Goを知らなくてもいいということなので、これは一般的には利点ではある   自分の環境の問題だが、Linux環境で日本語の記事を書くのは少し辛い  開発系はAwsのWorkspace(Amazon Linux)で行っており、Hugoの環境が必要になるため   投稿したらGithubPagesで自動でデプロイしてくれる仕組みを提供してくれているが、一旦様子を見たい＆スモールスタートしたいのでHugoで生成したブツをコピーしてGithubPagesに展開するような運用をとっている  その他メモ  プロジェクトを作った後に、git add . して一旦綺麗なプロジェクトをコミットしたつもりになって、後から雑に作業&amp;amp;git stash -u したらプロジェクト初期化時に追加されていた空のディレクトリがなくなり少しはまった  参考記事 https://memorandom.whitepenguins.com/posts/hugo_linux/
+sudo yum install -y yum-plugin-copr sudo yum copr enable -y daftaupe/hugo sudo yum install -y hugo hugo version </description>
+    </item>
+    
     <item>
       <title>20220219_golang備忘録</title>
       <link>https://addictionwhite.github.io/myblog/posts/20220219_golang%E5%82%99%E5%BF%98%E9%8C%B2/</link>
